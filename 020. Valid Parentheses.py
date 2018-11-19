@@ -31,6 +31,36 @@ class Solution:
         return False
 
 
+
+class Solution2:
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if len(s) == 0:
+            return True
+        if len(s) == 1:
+            return False
+        
+        pDict = { ')':'(', ']': '[', '}':'{' }
+        pStack = [s[0]]
+        
+        for i in s[1:]: 
+            if i not in pDict:
+                pStack.append(i)
+            elif (len(pStack) != 0) and (pDict[i] == pStack[-1]):
+                pStack.pop()
+            else: 
+                pStack.append(i)
+                
+        if len(pStack) == 0:
+            return True
+        else:
+            return False 
+            
+
+
 if __name__ == '__main__':
     s = Solution()
     print(s.isValid('{}[]'))
